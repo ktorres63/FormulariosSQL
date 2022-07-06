@@ -68,7 +68,7 @@ public class Persona extends javax.swing.JFrame {
                     columnData.add(rs.getString("PerMes"));
                     columnData.add(rs.getString("PerAño"));
                     columnData.add(rs.getString("PerCor"));
-                    columnData.add(rs.getString("PerFor"));
+                    columnData.add(rs.getString("PerFot"));
                     columnData.add(rs.getString("PerCoo"));
                     columnData.add(rs.getString("PerCar"));
                     columnData.add(rs.getString("PerEstReg"));
@@ -104,7 +104,7 @@ public class Persona extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         perApePat = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        perNom1 = new javax.swing.JTextField();
+        perCor = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         perDia = new javax.swing.JTextField();
@@ -133,7 +133,6 @@ public class Persona extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        perFot1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -209,12 +208,12 @@ public class Persona extends javax.swing.JFrame {
         jLabel11.setText("Apellido Materno");
         jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, -1, -1));
 
-        perNom1.addActionListener(new java.awt.event.ActionListener() {
+        perCor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                perNom1ActionPerformed(evt);
+                perCorActionPerformed(evt);
             }
         });
-        jPanel2.add(perNom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 130, -1));
+        jPanel2.add(perCor, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 130, -1));
 
         jLabel12.setText("dia");
         jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, -1, -1));
@@ -403,13 +402,6 @@ public class Persona extends javax.swing.JFrame {
         jLabel6.setText("Tabla tipo de Persona");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 150, -1));
 
-        perFot1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                perFot1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(perFot1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 130, 80, -1));
-
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 930, 580));
 
         pack();
@@ -420,21 +412,37 @@ public class Persona extends javax.swing.JFrame {
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         perCod.setText("");
         perIden.setText("");
-        perAño.setText("");
         perApePat.setText("");
         perApeMat.setText("");
         perNom.setText("");
+        perDia.setText("");
+        perMes.setText("");
+        perAño.setText("");
+        perCor.setText("");
+        perFot.setText("");
+        perCoo.setText("");
+        perCar.setText("");
         perEstReg.setText("A");
-        
+           
         flags[0] = 1;
         
         perEstReg.setEditable(false);
+        
         perCod.setEditable(true);
         perIden.setEditable(true);
-        perAño.setEditable(true);
         perApePat.setEditable(true);
         perApeMat.setEditable(true);
         perNom.setEditable(true);
+        perDia.setEditable(true);
+        perMes.setEditable(true);   
+        perAño.setEditable(true);
+        perCor.setEditable(true);
+        perFot.setEditable(true);
+        perCoo.setEditable(true);
+        perCar.setEditable(true);
+      
+        
+        
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -451,11 +459,19 @@ public class Persona extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         perCod.setText("");
         perIden.setText("");
-        perAño.setText("");
         perApePat.setText("");
         perApeMat.setText("");
         perNom.setText("");
+        perDia.setText("");
+        perMes.setText("");
+        perAño.setText("");
+        perCor.setText("");
+        perFot.setText("");
+        perCoo.setText("");
+        perCar.setText("");
         perEstReg.setText("");
+        
+        
         flagsZero();
         perEstReg.setEditable(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -479,15 +495,22 @@ public class Persona extends javax.swing.JFrame {
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
 
-            pst = sqlConn.prepareStatement("INSERT INTO C1M_USUARIO (UsuCod, UsuIde, UsuUsu, UsuPas, UsuEmp, UsuRol, UsuEstReg)"
-                    + "VALUES (?,?,?,?,?,?,?) ");
+            pst = sqlConn.prepareStatement("INSERT INTO C2M_PERSONA (PerCod, PerIden, PerApePat, PerApeMat, PerNom, PerDia, PerMes, PerAño, PerCor, PerFot, PerCoo, PerCar, PerEstReg)"
+                    + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?) ");
             pst.setString(1, perCod.getText());
             pst.setString(2, perIden.getText());
-            pst.setString(3, perAño.getText());
-            pst.setString(4, perApePat.getText());
-            pst.setString(5, perApeMat.getText());
-            pst.setString(6, perNom.getText());
-            pst.setString(7, perEstReg.getText());
+            pst.setString(3, perApePat.getText());
+            pst.setString(4, perApeMat.getText());
+            pst.setString(5, perNom.getText());
+            pst.setString(6, perDia.getText());
+            pst.setString(7, perMes.getText());
+            pst.setString(8, perAño.getText());
+            pst.setString(9, perCor.getText());
+            pst.setString(10, perFot.getText());
+            pst.setString(11, perCoo.getText());
+            pst.setString(12, perCar.getText());
+            pst.setString(13, perEstReg.getText());
+            
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Added");            
             upDateDB();
@@ -501,10 +524,23 @@ public class Persona extends javax.swing.JFrame {
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
             
-            pst = sqlConn.prepareStatement("UPDATE C1M_USUARIO SET UsuUsu = ?, UsuPas = ? WHERE UsuCod= ? ");
-            pst.setString(1, perAño.getText());
-            pst.setString(2, perApePat.getText());
-            pst.setString(3, perCod.getText());
+            pst = sqlConn.prepareStatement("UPDATE C2M_PERSONA SET PerApePat = ?, PerApeMat = ?, PerNom = ?, PerDia = ?, PerMes = ?, PerAño = ?, PerCor = ?, PerFot = ? WHERE PerCod= ? ");
+            //PerApePat	PerApeMat	PerNom	PerDia	PerMes	PerAño	PerCor	PerFot	
+            
+            
+            
+            pst.setString(1, perApePat.getText());
+            pst.setString(2, perApeMat.getText());
+            pst.setString(3, perNom.getText());
+            pst.setString(4, perDia.getText());
+            pst.setString(5, perMes.getText());
+            pst.setString(6, perAño.getText());
+            pst.setString(7, perCor.getText());
+            pst.setString(8, perFot.getText());
+       
+            pst.setString(9, perCod.getText());
+            
+            
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Uptaded");            
             upDateDB();
@@ -517,8 +553,10 @@ public class Persona extends javax.swing.JFrame {
         try{
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
-            
-            pst = sqlConn.prepareStatement("UPDATE C1M_USUARIO SET UsuEstReg = ? WHERE  UsuCod = ? ");
+            //PerCod-PerIden-PerApePat-PerApeMat-PerNom-PerDia-PerMes-PerAño-PerCor-PerFot-PerCoo-PerCar-PerEstReg
+
+
+            pst = sqlConn.prepareStatement("UPDATE C2M_PERSONA SET PerEstReg = ? WHERE  PerCod = ? ");
             pst.setString(1, "*");
             pst.setString(2, perCod.getText());
             pst.executeUpdate();
@@ -532,8 +570,9 @@ public class Persona extends javax.swing.JFrame {
         try{
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
-            
-            pst = sqlConn.prepareStatement("UPDATE C1M_USUARIO SET UsuEstReg = ? WHERE UsuCod = ?");
+            //PerCod-PerIden-PerApePat-PerApeMat-PerNom-PerDia-PerMes-PerAño-PerCor-PerFot-PerCoo-PerCar-PerEstReg
+
+            pst = sqlConn.prepareStatement("UPDATE C2M_PERSONA SET PerEstReg = ? WHERE PerCod = ?");
             pst.setString(1, "I");
             pst.setString(2, perCod.getText());
             pst.executeUpdate();
@@ -547,7 +586,7 @@ public class Persona extends javax.swing.JFrame {
         try{
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
-            pst = sqlConn.prepareStatement("UPDATE C1M_USUARIO SET UsuEstReg = ? WHERE UsuCod = ?");
+            pst = sqlConn.prepareStatement("UPDATE C2M_PERSONA SET PerEstReg = ? WHERE PerCod = ?");
             pst.setString(1, "A");
             pst.setString(2, perCod.getText());
             pst.executeUpdate();
@@ -561,19 +600,34 @@ public class Persona extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel RecordTable = (DefaultTableModel) jTable1.getModel();
         int SelectedRows = jTable1.getSelectedRow();
+        //PerCod-PerIden-PerApePat-PerApeMat-PerNom-PerDia-PerMes-PerAño-PerCor-PerFot-PerCoo-PerCar-PerEstReg
+
         perCod.setText(RecordTable.getValueAt(SelectedRows, 0).toString());
         perIden.setText(RecordTable.getValueAt(SelectedRows, 1).toString());
-        perAño.setText(RecordTable.getValueAt(SelectedRows, 2).toString());
-        perApePat.setText(RecordTable.getValueAt(SelectedRows, 3).toString());
-        perApeMat.setText(RecordTable.getValueAt(SelectedRows, 4).toString());
-        perNom.setText(RecordTable.getValueAt(SelectedRows, 5).toString());
-        perEstReg.setText(RecordTable.getValueAt(SelectedRows, 6).toString());
+        perApePat.setText(RecordTable.getValueAt(SelectedRows, 2).toString());
+        perApeMat.setText(RecordTable.getValueAt(SelectedRows, 3).toString());
+        perNom.setText(RecordTable.getValueAt(SelectedRows, 4).toString());
+        perDia.setText(RecordTable.getValueAt(SelectedRows, 5).toString());
+        perMes.setText(RecordTable.getValueAt(SelectedRows, 6).toString());
+        perAño.setText(RecordTable.getValueAt(SelectedRows, 7).toString());
+        perCor.setText(RecordTable.getValueAt(SelectedRows, 8).toString());
+        perFot.setText(RecordTable.getValueAt(SelectedRows, 9).toString());
+        perCoo.setText(RecordTable.getValueAt(SelectedRows, 10).toString());
+        perCar.setText(RecordTable.getValueAt(SelectedRows, 11).toString());
+        perEstReg.setText(RecordTable.getValueAt(SelectedRows, 12).toString());
+        
         perCod.setEditable(false);
         perIden.setEditable(false);
-        perAño.setEditable(false);
         perApePat.setEditable(false);
         perApeMat.setEditable(false);
         perNom.setEditable(false);
+        perDia.setEditable(false);
+        perMes.setEditable(false);
+        perAño.setEditable(false);
+        perCor.setEditable(false);
+        perFot.setEditable(false);
+        perCoo.setEditable(false);
+        perCar.setEditable(false);
         perEstReg.setEditable(false);
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -584,9 +638,34 @@ public class Persona extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         flags[1] = 1;
-        perAño.setEditable(true);
+        
+        /*
+        t = sqlConn.prepareStatement("UPDATE C2M_PERSONA SET PerApePat = ?, PerApeMat = ?, PerNom = ?, PerDia = ?, PerMes = ?, PerAño = ?, PerCor = ?, PerFot = ? WHERE PerCod= ? ");
+            //PerApePat	PerApeMat	PerNom	PerDia	PerMes	PerAño	PerCor	PerFot	
+            pst.setString(1, perApePat.getText());
+            pst.setString(2, perApeMat.getText());
+            pst.setString(3, perNom.getText());
+            pst.setString(4, perDia.getText());
+            pst.setString(5, perMes.getText());
+            pst.setString(6, perAño.getText());
+            pst.setString(7, perCor.getText());
+            pst.setString(8, perFot.getText());
+       
+            pst.setString(9, perCod.getText());
+        */
         perApePat.setEditable(true);
-        perNom.setEditable(false);
+        perApeMat.setEditable(true);
+        perNom.setEditable(true);
+        
+        perDia.setEditable(false);
+        perMes.setEditable(false);
+        perAño.setEditable(false);
+        
+        perCor.setEditable(true);
+        perFot.setEditable(true);
+        
+        perCar.setEditable(false);
+        perCoo.setEditable(false);
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -621,9 +700,9 @@ public class Persona extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_perCodActionPerformed
 
-    private void perNom1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perNom1ActionPerformed
+    private void perCorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perCorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_perNom1ActionPerformed
+    }//GEN-LAST:event_perCorActionPerformed
 
     private void perDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perDiaActionPerformed
         // TODO add your handling code here:
@@ -636,10 +715,6 @@ public class Persona extends javax.swing.JFrame {
     private void perFotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perFotActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_perFotActionPerformed
-
-    private void perFot1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perFot1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_perFot1ActionPerformed
 
     private void perCooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perCooActionPerformed
         // TODO add your handling code here:
@@ -738,13 +813,12 @@ public class Persona extends javax.swing.JFrame {
     private javax.swing.JTextField perCar;
     private javax.swing.JTextField perCod;
     private javax.swing.JTextField perCoo;
+    private javax.swing.JTextField perCor;
     private javax.swing.JTextField perDia;
     private javax.swing.JTextField perEstReg;
     private javax.swing.JTextField perFot;
-    private javax.swing.JTextField perFot1;
     private javax.swing.JTextField perIden;
     private javax.swing.JTextField perMes;
     private javax.swing.JTextField perNom;
-    private javax.swing.JTextField perNom1;
     // End of variables declaration//GEN-END:variables
 }

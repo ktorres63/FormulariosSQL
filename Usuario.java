@@ -329,7 +329,9 @@ public class Usuario extends javax.swing.JFrame {
         usuEmp.setText("");
         usuRol.setText("");
         usuEst.setText("A");
+        
         flags[0] = 1;
+        
         usuEst.setEditable(false);
         usuCod.setEditable(true);
         usuIden.setEditable(true);
@@ -470,6 +472,7 @@ public class Usuario extends javax.swing.JFrame {
         usuEmp.setText(RecordTable.getValueAt(SelectedRows, 4).toString());
         usuRol.setText(RecordTable.getValueAt(SelectedRows, 5).toString());
         usuEst.setText(RecordTable.getValueAt(SelectedRows, 6).toString());
+        
         usuCod.setEditable(false);
         usuIden.setEditable(false);
         usuUsu.setEditable(false);
