@@ -314,7 +314,7 @@ public class Producto extends javax.swing.JFrame {
         proIden.setText("");
         proMon.setText("");
         proDesc.setText("");
-        usuEmp.setText("");
+        //usuEmp.setText("");
         proSoc.setText("");
         proEstReg.setText("A");
         flags[0] = 1;
@@ -323,7 +323,7 @@ public class Producto extends javax.swing.JFrame {
         proIden.setEditable(true);
         proMon.setEditable(true);
         proDesc.setEditable(true);
-        usuEmp.setEditable(true);
+        //usuEmp.setEditable(true);
         proSoc.setEditable(true);
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
@@ -343,7 +343,7 @@ public class Producto extends javax.swing.JFrame {
         proIden.setText("");
         proMon.setText("");
         proDesc.setText("");
-        usuEmp.setText("");
+       // usuEmp.setText("");
         proSoc.setText("");
         proEstReg.setText("");
         flagsZero();
@@ -375,7 +375,7 @@ public class Producto extends javax.swing.JFrame {
             pst.setString(2, proIden.getText());
             pst.setString(3, proMon.getText());
             pst.setString(4, proDesc.getText());
-            pst.setString(5, usuEmp.getText());
+           // pst.setString(5, usuEmp.getText());
             pst.setString(6, proSoc.getText());
             pst.setString(7, proEstReg.getText());
             pst.executeUpdate();
@@ -455,14 +455,14 @@ public class Producto extends javax.swing.JFrame {
         proIden.setText(RecordTable.getValueAt(SelectedRows, 1).toString());
         proMon.setText(RecordTable.getValueAt(SelectedRows, 2).toString());
         proDesc.setText(RecordTable.getValueAt(SelectedRows, 3).toString());
-        usuEmp.setText(RecordTable.getValueAt(SelectedRows, 4).toString());
+      //  usuEmp.setText(RecordTable.getValueAt(SelectedRows, 4).toString());
         proSoc.setText(RecordTable.getValueAt(SelectedRows, 5).toString());
         proEstReg.setText(RecordTable.getValueAt(SelectedRows, 6).toString());
         proCod.setEditable(false);
         proIden.setEditable(false);
         proMon.setEditable(false);
         proDesc.setEditable(false);
-        usuEmp.setEditable(false);
+       // usuEmp.setEditable(false);
         proSoc.setEditable(false);
         proEstReg.setEditable(false);
     }//GEN-LAST:event_jTable1MouseClicked

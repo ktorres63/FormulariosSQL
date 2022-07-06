@@ -49,7 +49,7 @@ public class Cargo extends javax.swing.JFrame {
         try{
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
-            pst = sqlConn.prepareStatement("SELECT * FROM C1M_ROL");
+            pst = sqlConn.prepareStatement("SELECT * FROM C2M_CARGO");
             
             rs = pst.executeQuery();
             ResultSetMetaData stData = rs.getMetaData();
@@ -61,12 +61,10 @@ public class Cargo extends javax.swing.JFrame {
             while(rs.next()){
                 Vector columnData = new Vector();
                 for(i = 1; i <= q;i++){
-                    columnData.add(rs.getString("RolCod"));
-                    columnData.add(rs.getString("RolRol"));
-                    columnData.add(rs.getString("RolNom"));
-                    columnData.add(rs.getString("RolUsu"));
-                    columnData.add(rs.getString("RolEstReg"));
-    
+                    columnData.add(rs.getString("CarCod"));
+                    columnData.add(rs.getString("CarDesc"));
+                    columnData.add(rs.getString("CarFun"));
+                    columnData.add(rs.getString("UsuEstReg"));    
                 }
                 RecordTable.addRow(columnData);
             }
@@ -292,14 +290,14 @@ public class Cargo extends javax.swing.JFrame {
         carCod.setText("");
         carDesc.setText("");
         carFunc.setText("");
-        rolUsu.setText("");
+       
         carEstReg.setText("A");
         flags[0] = 1;
         carEstReg.setEditable(false);
         carCod.setEditable(true);
         carDesc.setEditable(true);
         carFunc.setEditable(true);
-        rolUsu.setEditable(true);
+       
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -317,7 +315,6 @@ public class Cargo extends javax.swing.JFrame {
         carCod.setText("");
         carDesc.setText("");
         carFunc.setText("");
-        rolUsu.setText("");
         carEstReg.setText("");
         flagsZero();
         carEstReg.setEditable(false);
@@ -342,13 +339,12 @@ public class Cargo extends javax.swing.JFrame {
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
 
-            pst = sqlConn.prepareStatement("INSERT INTO C1M_ROL (RolCod, RolRol, RolNom, RolUsu,RolEstReg)"
-                    + "VALUES (?,?,?,?,?) ");
+            pst = sqlConn.prepareStatement("INSERT INTO C2M_CARGO (CarCod, CarDesc, CarFun, UsuEstReg)"
+                    + "VALUES (?,?,?,?) ");
             pst.setString(1, carCod.getText());
             pst.setString(2, carDesc.getText());
             pst.setString(3, carFunc.getText());
-            pst.setString(4, rolUsu.getText());
-            pst.setString(5, carEstReg.getText());
+            pst.setString(4, carEstReg.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Added");            
             upDateDB();
@@ -362,7 +358,7 @@ public class Cargo extends javax.swing.JFrame {
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
             
-            pst = sqlConn.prepareStatement("UPDATE C1M_ROL SET RolRol = ?, RolNom = ? WHERE RolCod= ? ");
+            pst = sqlConn.prepareStatement("UPDATE C2M_CARGO SET CarDesc = ?, CarFun = ? WHERE CarCod= ? ");
             pst.setString(1, carDesc.getText());
             pst.setString(2, carFunc.getText());
             pst.setString(3, carCod.getText());
@@ -379,7 +375,7 @@ public class Cargo extends javax.swing.JFrame {
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
             
-            pst = sqlConn.prepareStatement("UPDATE C1M_ROL SET RolEstReg = ? WHERE  RolCod = ? ");
+            pst = sqlConn.prepareStatement("UPDATE C2M_CARGO SET UsuEstReg = ? WHERE  CarCod = ? ");
             pst.setString(1, "*");
             pst.setString(2, carCod.getText());
             pst.executeUpdate();
@@ -394,7 +390,7 @@ public class Cargo extends javax.swing.JFrame {
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
             
-            pst = sqlConn.prepareStatement("UPDATE C1M_ROL SET RolEstReg = ? WHERE RolCod = ?");
+            pst = sqlConn.prepareStatement("UPDATE C2M_CARGO SET UsuEstReg = ? WHERE CarCod = ?");
             pst.setString(1, "I");
             pst.setString(2, carCod.getText());
             pst.executeUpdate();
@@ -408,7 +404,7 @@ public class Cargo extends javax.swing.JFrame {
         try{
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
-            pst = sqlConn.prepareStatement("UPDATE C1M_ROL SET RolEstReg = ? WHERE RolCod = ?");
+            pst = sqlConn.prepareStatement("UPDATE C2M_CARGO SET UsuEstReg = ? WHERE CarCod = ?");
             pst.setString(1, "A");
             pst.setString(2, carCod.getText());
             pst.executeUpdate();
@@ -425,12 +421,10 @@ public class Cargo extends javax.swing.JFrame {
         carCod.setText(RecordTable.getValueAt(SelectedRows, 0).toString());
         carDesc.setText(RecordTable.getValueAt(SelectedRows, 1).toString());
         carFunc.setText(RecordTable.getValueAt(SelectedRows, 2).toString());
-        rolUsu.setText(RecordTable.getValueAt(SelectedRows, 3).toString());
-        carEstReg.setText(RecordTable.getValueAt(SelectedRows, 4).toString());
+        carEstReg.setText(RecordTable.getValueAt(SelectedRows, 3).toString());
         carCod.setEditable(false);
         carDesc.setEditable(false);
         carFunc.setEditable(false);
-        rolUsu.setEditable(false);
         carEstReg.setEditable(false);
     }//GEN-LAST:event_jTable1MouseClicked
 
