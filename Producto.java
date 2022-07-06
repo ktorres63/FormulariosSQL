@@ -1,11 +1,9 @@
-package formsjava_mysql;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+package formsjava_mysql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -21,8 +19,8 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author boris
  */
-public class Cargo extends javax.swing.JFrame {
-    
+public class Producto extends javax.swing.JFrame {
+
     private final String dbName    = Conexion_MYSQL.getDbName();
     private final String userName  = Conexion_MYSQL.getUserName();
     private final String password  = Conexion_MYSQL.getPassword();
@@ -33,7 +31,8 @@ public class Cargo extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     int q, i, id, deleteItem;
-    public Cargo() {
+    
+    public Producto() {
         initComponents();
         upDateDB();
     }
@@ -49,7 +48,7 @@ public class Cargo extends javax.swing.JFrame {
         try{
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
-            pst = sqlConn.prepareStatement("SELECT * FROM C1M_ROL");
+            pst = sqlConn.prepareStatement("SELECT * FROM C1M_USUARIO");
             
             rs = pst.executeQuery();
             ResultSetMetaData stData = rs.getMetaData();
@@ -61,12 +60,13 @@ public class Cargo extends javax.swing.JFrame {
             while(rs.next()){
                 Vector columnData = new Vector();
                 for(i = 1; i <= q;i++){
-                    columnData.add(rs.getString("RolCod"));
-                    columnData.add(rs.getString("RolRol"));
-                    columnData.add(rs.getString("RolNom"));
-                    columnData.add(rs.getString("RolUsu"));
-                    columnData.add(rs.getString("RolEstReg"));
-    
+                    columnData.add(rs.getString("UsuCod"));
+                    columnData.add(rs.getString("UsuIde"));
+                    columnData.add(rs.getString("UsuUsu"));
+                    columnData.add(rs.getString("UsuPas"));
+                    columnData.add(rs.getString("UsuEmp"));
+                    columnData.add(rs.getString("UsuRol"));
+                    columnData.add(rs.getString("UsuEstReg"));
                 }
                 RecordTable.addRow(columnData);
             }
@@ -85,13 +85,17 @@ public class Cargo extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        carCod = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        proCod = new javax.swing.JTextField();
+        proIden = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        carEstReg = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        carDesc = new javax.swing.JTextField();
+        proEstReg = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        proSoc = new javax.swing.JTextField();
+        proMon = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        carFunc = new javax.swing.JTextField();
+        proDesc = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -116,42 +120,59 @@ public class Cargo extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(95, 158, 160), 4));
+        jPanel2.setToolTipText("aa");
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setText("Codigo:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
-        jPanel2.add(carCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 60, -1));
+
+        jLabel4.setText("Identificador:");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+        jPanel2.add(proCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 60, -1));
+
+        proIden.setToolTipText("");
+        jPanel2.add(proIden, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 100, -1));
 
         jLabel5.setText("Estado de Registro");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
-        carEstReg.setText("A");
-        carEstReg.addActionListener(new java.awt.event.ActionListener() {
+        proEstReg.setText("A");
+        proEstReg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                carEstRegActionPerformed(evt);
+                proEstRegActionPerformed(evt);
             }
         });
-        jPanel2.add(carEstReg, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 20, -1));
+        jPanel2.add(proEstReg, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 20, -1));
 
-        jLabel8.setText("Descripcion");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, -1, -1));
+        jLabel7.setText("Socio");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, -1, -1));
 
-        carDesc.addActionListener(new java.awt.event.ActionListener() {
+        proSoc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                carDescActionPerformed(evt);
+                proSocActionPerformed(evt);
             }
         });
-        jPanel2.add(carDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 210, 40));
+        jPanel2.add(proSoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 170, -1));
 
-        jLabel10.setText("Funciones");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, -1, -1));
-
-        carFunc.addActionListener(new java.awt.event.ActionListener() {
+        proMon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                carFuncActionPerformed(evt);
+                proMonActionPerformed(evt);
             }
         });
-        jPanel2.add(carFunc, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 80, 210, 40));
+        jPanel2.add(proMon, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, 110, -1));
+
+        jLabel9.setText("Moneda");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, -1, -1));
+
+        jLabel10.setText("Descripcion");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
+
+        proDesc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                proDescActionPerformed(evt);
+            }
+        });
+        jPanel2.add(proDesc, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 200, 50));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 870, 140));
 
@@ -163,13 +184,13 @@ public class Cargo extends javax.swing.JFrame {
         jTable1.setBackground(new java.awt.Color(255, 250, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Descripcion", "Funciones", "Estado de Registroo"
+                "Codigo", "Identificador", "Descripcion", "Socio", "Moneda", "Estado de Registro"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -179,7 +200,7 @@ public class Cargo extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 690, 110));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 690, 110));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 870, 140));
 
@@ -255,7 +276,7 @@ public class Cargo extends javax.swing.JFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel1.setText("Cargo");
+        jLabel1.setText("Producto");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -275,13 +296,13 @@ public class Cargo extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 150, 40));
 
-        jLabel2.setText("Registro de Cargo");
+        jLabel2.setText("Registro de Producto");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 200, -1));
 
-        jLabel6.setText("Tabla tipo de Cargos");
+        jLabel6.setText("Tabla tipo de Producto");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 150, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 930, 960));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 930, 580));
 
         pack();
         setLocationRelativeTo(null);
@@ -289,17 +310,21 @@ public class Cargo extends javax.swing.JFrame {
     private int[] flags = new int[5];
     private JFrame frame;
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        carCod.setText("");
-        carDesc.setText("");
-        carFunc.setText("");
-        rolUsu.setText("");
-        carEstReg.setText("A");
+        proCod.setText("");
+        proIden.setText("");
+        proMon.setText("");
+        proDesc.setText("");
+        usuEmp.setText("");
+        proSoc.setText("");
+        proEstReg.setText("A");
         flags[0] = 1;
-        carEstReg.setEditable(false);
-        carCod.setEditable(true);
-        carDesc.setEditable(true);
-        carFunc.setEditable(true);
-        rolUsu.setEditable(true);
+        proEstReg.setEditable(false);
+        proCod.setEditable(true);
+        proIden.setEditable(true);
+        proMon.setEditable(true);
+        proDesc.setEditable(true);
+        usuEmp.setEditable(true);
+        proSoc.setEditable(true);
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -314,13 +339,15 @@ public class Cargo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        carCod.setText("");
-        carDesc.setText("");
-        carFunc.setText("");
-        rolUsu.setText("");
-        carEstReg.setText("");
+        proCod.setText("");
+        proIden.setText("");
+        proMon.setText("");
+        proDesc.setText("");
+        usuEmp.setText("");
+        proSoc.setText("");
+        proEstReg.setText("");
         flagsZero();
-        carEstReg.setEditable(false);
+        proEstReg.setEditable(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
     private void flagsZero(){
         for(int i = 0;i < flags.length; i++)
@@ -342,13 +369,15 @@ public class Cargo extends javax.swing.JFrame {
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
 
-            pst = sqlConn.prepareStatement("INSERT INTO C1M_ROL (RolCod, RolRol, RolNom, RolUsu,RolEstReg)"
-                    + "VALUES (?,?,?,?,?) ");
-            pst.setString(1, carCod.getText());
-            pst.setString(2, carDesc.getText());
-            pst.setString(3, carFunc.getText());
-            pst.setString(4, rolUsu.getText());
-            pst.setString(5, carEstReg.getText());
+            pst = sqlConn.prepareStatement("INSERT INTO C1M_USUARIO (UsuCod, UsuIde, UsuUsu, UsuPas, UsuEmp, UsuRol, UsuEstReg)"
+                    + "VALUES (?,?,?,?,?,?,?) ");
+            pst.setString(1, proCod.getText());
+            pst.setString(2, proIden.getText());
+            pst.setString(3, proMon.getText());
+            pst.setString(4, proDesc.getText());
+            pst.setString(5, usuEmp.getText());
+            pst.setString(6, proSoc.getText());
+            pst.setString(7, proEstReg.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Added");            
             upDateDB();
@@ -362,10 +391,10 @@ public class Cargo extends javax.swing.JFrame {
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
             
-            pst = sqlConn.prepareStatement("UPDATE C1M_ROL SET RolRol = ?, RolNom = ? WHERE RolCod= ? ");
-            pst.setString(1, carDesc.getText());
-            pst.setString(2, carFunc.getText());
-            pst.setString(3, carCod.getText());
+            pst = sqlConn.prepareStatement("UPDATE C1M_USUARIO SET UsuUsu = ?, UsuPas = ? WHERE UsuCod= ? ");
+            pst.setString(1, proMon.getText());
+            pst.setString(2, proDesc.getText());
+            pst.setString(3, proCod.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Uptaded");            
             upDateDB();
@@ -379,9 +408,9 @@ public class Cargo extends javax.swing.JFrame {
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
             
-            pst = sqlConn.prepareStatement("UPDATE C1M_ROL SET RolEstReg = ? WHERE  RolCod = ? ");
+            pst = sqlConn.prepareStatement("UPDATE C1M_USUARIO SET UsuEstReg = ? WHERE  UsuCod = ? ");
             pst.setString(1, "*");
-            pst.setString(2, carCod.getText());
+            pst.setString(2, proCod.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Deleted");            
             upDateDB();
@@ -394,9 +423,9 @@ public class Cargo extends javax.swing.JFrame {
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
             
-            pst = sqlConn.prepareStatement("UPDATE C1M_ROL SET RolEstReg = ? WHERE RolCod = ?");
+            pst = sqlConn.prepareStatement("UPDATE C1M_USUARIO SET UsuEstReg = ? WHERE UsuCod = ?");
             pst.setString(1, "I");
-            pst.setString(2, carCod.getText());
+            pst.setString(2, proCod.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Inactive");            
             upDateDB();
@@ -408,9 +437,9 @@ public class Cargo extends javax.swing.JFrame {
         try{
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
-            pst = sqlConn.prepareStatement("UPDATE C1M_ROL SET RolEstReg = ? WHERE RolCod = ?");
+            pst = sqlConn.prepareStatement("UPDATE C1M_USUARIO SET UsuEstReg = ? WHERE UsuCod = ?");
             pst.setString(1, "A");
-            pst.setString(2, carCod.getText());
+            pst.setString(2, proCod.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Reactive");            
             upDateDB();
@@ -422,27 +451,32 @@ public class Cargo extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel RecordTable = (DefaultTableModel) jTable1.getModel();
         int SelectedRows = jTable1.getSelectedRow();
-        carCod.setText(RecordTable.getValueAt(SelectedRows, 0).toString());
-        carDesc.setText(RecordTable.getValueAt(SelectedRows, 1).toString());
-        carFunc.setText(RecordTable.getValueAt(SelectedRows, 2).toString());
-        rolUsu.setText(RecordTable.getValueAt(SelectedRows, 3).toString());
-        carEstReg.setText(RecordTable.getValueAt(SelectedRows, 4).toString());
-        carCod.setEditable(false);
-        carDesc.setEditable(false);
-        carFunc.setEditable(false);
-        rolUsu.setEditable(false);
-        carEstReg.setEditable(false);
+        proCod.setText(RecordTable.getValueAt(SelectedRows, 0).toString());
+        proIden.setText(RecordTable.getValueAt(SelectedRows, 1).toString());
+        proMon.setText(RecordTable.getValueAt(SelectedRows, 2).toString());
+        proDesc.setText(RecordTable.getValueAt(SelectedRows, 3).toString());
+        usuEmp.setText(RecordTable.getValueAt(SelectedRows, 4).toString());
+        proSoc.setText(RecordTable.getValueAt(SelectedRows, 5).toString());
+        proEstReg.setText(RecordTable.getValueAt(SelectedRows, 6).toString());
+        proCod.setEditable(false);
+        proIden.setEditable(false);
+        proMon.setEditable(false);
+        proDesc.setEditable(false);
+        usuEmp.setEditable(false);
+        proSoc.setEditable(false);
+        proEstReg.setEditable(false);
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void carEstRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carEstRegActionPerformed
+    private void proEstRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proEstRegActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_carEstRegActionPerformed
+    }//GEN-LAST:event_proEstRegActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         flags[1] = 1;
-        carDesc.setEditable(true);
-        carFunc.setEditable(true);
+        proMon.setEditable(true);
+        proDesc.setEditable(true);
+        proSoc.setEditable(false);
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -457,13 +491,17 @@ public class Cargo extends javax.swing.JFrame {
         flags[4] = 1;
     }//GEN-LAST:event_btnReactivarActionPerformed
 
-    private void carDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carDescActionPerformed
+    private void proSocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proSocActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_carDescActionPerformed
+    }//GEN-LAST:event_proSocActionPerformed
 
-    private void carFuncActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carFuncActionPerformed
+    private void proDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proDescActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_carFuncActionPerformed
+    }//GEN-LAST:event_proDescActionPerformed
+
+    private void proMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proMonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_proMonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -482,30 +520,14 @@ public class Cargo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Cargo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Producto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Cargo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Producto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Cargo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Producto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Cargo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Producto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -526,7 +548,7 @@ public class Cargo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Cargo().setVisible(true);
+                new Producto().setVisible(true);
             }
         });
     }
@@ -540,17 +562,15 @@ public class Cargo extends javax.swing.JFrame {
     private javax.swing.JButton btnInactivar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnReactivar;
-    private javax.swing.JTextField carCod;
-    private javax.swing.JTextField carDesc;
-    private javax.swing.JTextField carEstReg;
-    private javax.swing.JTextField carFunc;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -558,5 +578,11 @@ public class Cargo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField proCod;
+    private javax.swing.JTextField proDesc;
+    private javax.swing.JTextField proEstReg;
+    private javax.swing.JTextField proIden;
+    private javax.swing.JTextField proMon;
+    private javax.swing.JTextField proSoc;
     // End of variables declaration//GEN-END:variables
 }
