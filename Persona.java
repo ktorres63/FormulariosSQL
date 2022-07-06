@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author boris
  */
-public class Usuario extends javax.swing.JFrame {
+public class Persona extends javax.swing.JFrame {
 
     private final String dbName    = Conexion_MYSQL.getDbName();
     private final String userName  = Conexion_MYSQL.getUserName();
@@ -31,8 +31,7 @@ public class Usuario extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     int q, i, id, deleteItem;
-    
-    public Usuario() {
+    public Persona() {
         initComponents();
         upDateDB();
     }
@@ -48,7 +47,7 @@ public class Usuario extends javax.swing.JFrame {
         try{
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
-            pst = sqlConn.prepareStatement("SELECT * FROM C1M_USUARIO");
+            pst = sqlConn.prepareStatement("SELECT * FROM C2M_PERSONA");
             
             rs = pst.executeQuery();
             ResultSetMetaData stData = rs.getMetaData();
@@ -60,13 +59,20 @@ public class Usuario extends javax.swing.JFrame {
             while(rs.next()){
                 Vector columnData = new Vector();
                 for(i = 1; i <= q;i++){
-                    columnData.add(rs.getString("UsuCod"));
-                    columnData.add(rs.getString("UsuIde"));
-                    columnData.add(rs.getString("UsuUsu"));
-                    columnData.add(rs.getString("UsuPas"));
-                    columnData.add(rs.getString("UsuEmp"));
-                    columnData.add(rs.getString("UsuRol"));
-                    columnData.add(rs.getString("UsuEstReg"));
+                    columnData.add(rs.getString("PerCod"));
+                    columnData.add(rs.getString("PerIden"));
+                    columnData.add(rs.getString("PerApePat"));
+                    columnData.add(rs.getString("PerApeMat"));
+                    columnData.add(rs.getString("PerNom"));
+                    columnData.add(rs.getString("PerDia"));
+                    columnData.add(rs.getString("PerMes"));
+                    columnData.add(rs.getString("PerAño"));
+                    columnData.add(rs.getString("PerCor"));
+                    columnData.add(rs.getString("PerFor"));
+                    columnData.add(rs.getString("PerCoo"));
+                    columnData.add(rs.getString("PerCar"));
+                    columnData.add(rs.getString("PerEstReg"));
+
                 }
                 RecordTable.addRow(columnData);
             }
@@ -86,18 +92,31 @@ public class Usuario extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        usuCod = new javax.swing.JTextField();
-        usuIden = new javax.swing.JTextField();
+        perCod = new javax.swing.JTextField();
+        perIden = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        usuEst = new javax.swing.JTextField();
+        perEstReg = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        usuRol = new javax.swing.JTextField();
+        perNom = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        usuUsu = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        usuEmp = new javax.swing.JTextField();
+        perAño = new javax.swing.JTextField();
+        perApeMat = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        usuPass = new javax.swing.JTextField();
+        perApePat = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        perNom1 = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        perDia = new javax.swing.JTextField();
+        perMes = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        perFot = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        perCoo = new javax.swing.JTextField();
+        perCar = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -114,6 +133,7 @@ public class Usuario extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        perFot1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -122,69 +142,135 @@ public class Usuario extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(95, 158, 160), 4));
-        jPanel2.setToolTipText("aa");
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setText("Codigo:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
         jLabel4.setText("Identificador:");
-        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
-        jPanel2.add(usuCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 60, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, -1, -1));
 
-        usuIden.setToolTipText("");
-        jPanel2.add(usuIden, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 100, -1));
+        perCod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                perCodActionPerformed(evt);
+            }
+        });
+        jPanel2.add(perCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 60, -1));
+        jPanel2.add(perIden, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 100, -1));
 
         jLabel5.setText("Estado de Registro");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
-        usuEst.setText("A");
-        usuEst.addActionListener(new java.awt.event.ActionListener() {
+        perEstReg.setText("A");
+        perEstReg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usuEstActionPerformed(evt);
+                perEstRegActionPerformed(evt);
             }
         });
-        jPanel2.add(usuEst, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 20, -1));
+        jPanel2.add(perEstReg, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 20, -1));
 
-        jLabel7.setText("Rol");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, -1, -1));
+        jLabel7.setText("Nombre");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, -1, -1));
 
-        usuRol.addActionListener(new java.awt.event.ActionListener() {
+        perNom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usuRolActionPerformed(evt);
+                perNomActionPerformed(evt);
             }
         });
-        jPanel2.add(usuRol, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 90, -1));
+        jPanel2.add(perNom, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 110, -1));
 
-        jLabel8.setText("Usuario");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 20, -1, -1));
+        jLabel8.setText("año");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 50, -1, -1));
 
-        usuUsu.addActionListener(new java.awt.event.ActionListener() {
+        perAño.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usuUsuActionPerformed(evt);
+                perAñoActionPerformed(evt);
             }
         });
-        jPanel2.add(usuUsu, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 20, 90, -1));
+        jPanel2.add(perAño, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 50, 50, -1));
 
-        jLabel9.setText("Empresa");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 60, -1, -1));
-
-        usuEmp.addActionListener(new java.awt.event.ActionListener() {
+        perApeMat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usuEmpActionPerformed(evt);
+                perApeMatActionPerformed(evt);
             }
         });
-        jPanel2.add(usuEmp, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 90, -1));
+        jPanel2.add(perApeMat, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 50, 110, -1));
 
-        jLabel10.setText("Password");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
+        jLabel10.setText("Apellido Paterno");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 20, -1, -1));
 
-        usuPass.addActionListener(new java.awt.event.ActionListener() {
+        perApePat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usuPassActionPerformed(evt);
+                perApePatActionPerformed(evt);
             }
         });
-        jPanel2.add(usuPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 90, -1));
+        jPanel2.add(perApePat, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 110, -1));
+
+        jLabel11.setText("Apellido Materno");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, -1, -1));
+
+        perNom1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                perNom1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(perNom1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 130, -1));
+
+        jLabel12.setText("dia");
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, -1, -1));
+
+        jLabel13.setText("mes");
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 50, -1, -1));
+
+        perDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                perDiaActionPerformed(evt);
+            }
+        });
+        jPanel2.add(perDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 30, -1));
+
+        perMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                perMesActionPerformed(evt);
+            }
+        });
+        jPanel2.add(perMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 30, -1));
+
+        jLabel9.setText("Fecha Nac.");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 20, -1, -1));
+
+        jLabel14.setText("Cargo");
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 80, -1, -1));
+
+        jLabel15.setText("Correo");
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, -1, -1));
+
+        perFot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                perFotActionPerformed(evt);
+            }
+        });
+        jPanel2.add(perFot, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 20, 130, -1));
+
+        jLabel16.setText("foto");
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 20, -1, -1));
+
+        jLabel17.setText("Cooperativa");
+        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 50, -1, -1));
+
+        perCoo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                perCooActionPerformed(evt);
+            }
+        });
+        jPanel2.add(perCoo, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 50, 90, -1));
+
+        perCar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                perCarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(perCar, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 130, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 870, 140));
 
@@ -196,13 +282,13 @@ public class Usuario extends javax.swing.JFrame {
         jTable1.setBackground(new java.awt.Color(255, 250, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Identificador", "Usuario", "Password", "Empresa", "Rol", "Estado de Registro"
+                "Codigo", "Identificador", "Apellido Paterno", "Apellido Materno", "Nombre", "Nac. dia", "Nac. mes", "Nac. año", "Correo", "foto", "Cooperativa", "Cargo"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -211,8 +297,11 @@ public class Usuario extends javax.swing.JFrame {
             }
         });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
+        }
 
-        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 690, 110));
+        jPanel3.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 780, 110));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 870, 140));
 
@@ -288,7 +377,7 @@ public class Usuario extends javax.swing.JFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel1.setText("Usuario");
+        jLabel1.setText("Persona");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -308,11 +397,18 @@ public class Usuario extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 150, 40));
 
-        jLabel2.setText("Registro de usuario");
+        jLabel2.setText("Registro de Persona");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 200, -1));
 
-        jLabel6.setText("Tabla tipo de usuarios");
+        jLabel6.setText("Tabla tipo de Persona");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 150, -1));
+
+        perFot1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                perFot1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(perFot1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 130, 80, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 930, 580));
 
@@ -322,21 +418,23 @@ public class Usuario extends javax.swing.JFrame {
     private int[] flags = new int[5];
     private JFrame frame;
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        usuCod.setText("");
-        usuIden.setText("");
-        usuUsu.setText("");
-        usuPass.setText("");
-        usuEmp.setText("");
-        usuRol.setText("");
-        usuEst.setText("A");
+        perCod.setText("");
+        perIden.setText("");
+        perAño.setText("");
+        perApePat.setText("");
+        perApeMat.setText("");
+        perNom.setText("");
+        perEstReg.setText("A");
+        
         flags[0] = 1;
-        usuEst.setEditable(false);
-        usuCod.setEditable(true);
-        usuIden.setEditable(true);
-        usuUsu.setEditable(true);
-        usuPass.setEditable(true);
-        usuEmp.setEditable(true);
-        usuRol.setEditable(true);
+        
+        perEstReg.setEditable(false);
+        perCod.setEditable(true);
+        perIden.setEditable(true);
+        perAño.setEditable(true);
+        perApePat.setEditable(true);
+        perApeMat.setEditable(true);
+        perNom.setEditable(true);
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -351,15 +449,15 @@ public class Usuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        usuCod.setText("");
-        usuIden.setText("");
-        usuUsu.setText("");
-        usuPass.setText("");
-        usuEmp.setText("");
-        usuRol.setText("");
-        usuEst.setText("");
+        perCod.setText("");
+        perIden.setText("");
+        perAño.setText("");
+        perApePat.setText("");
+        perApeMat.setText("");
+        perNom.setText("");
+        perEstReg.setText("");
         flagsZero();
-        usuEst.setEditable(false);
+        perEstReg.setEditable(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
     private void flagsZero(){
         for(int i = 0;i < flags.length; i++)
@@ -383,13 +481,13 @@ public class Usuario extends javax.swing.JFrame {
 
             pst = sqlConn.prepareStatement("INSERT INTO C1M_USUARIO (UsuCod, UsuIde, UsuUsu, UsuPas, UsuEmp, UsuRol, UsuEstReg)"
                     + "VALUES (?,?,?,?,?,?,?) ");
-            pst.setString(1, usuCod.getText());
-            pst.setString(2, usuIden.getText());
-            pst.setString(3, usuUsu.getText());
-            pst.setString(4, usuPass.getText());
-            pst.setString(5, usuEmp.getText());
-            pst.setString(6, usuRol.getText());
-            pst.setString(7, usuEst.getText());
+            pst.setString(1, perCod.getText());
+            pst.setString(2, perIden.getText());
+            pst.setString(3, perAño.getText());
+            pst.setString(4, perApePat.getText());
+            pst.setString(5, perApeMat.getText());
+            pst.setString(6, perNom.getText());
+            pst.setString(7, perEstReg.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Added");            
             upDateDB();
@@ -404,9 +502,9 @@ public class Usuario extends javax.swing.JFrame {
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
             
             pst = sqlConn.prepareStatement("UPDATE C1M_USUARIO SET UsuUsu = ?, UsuPas = ? WHERE UsuCod= ? ");
-            pst.setString(1, usuUsu.getText());
-            pst.setString(2, usuPass.getText());
-            pst.setString(3, usuCod.getText());
+            pst.setString(1, perAño.getText());
+            pst.setString(2, perApePat.getText());
+            pst.setString(3, perCod.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Uptaded");            
             upDateDB();
@@ -422,7 +520,7 @@ public class Usuario extends javax.swing.JFrame {
             
             pst = sqlConn.prepareStatement("UPDATE C1M_USUARIO SET UsuEstReg = ? WHERE  UsuCod = ? ");
             pst.setString(1, "*");
-            pst.setString(2, usuCod.getText());
+            pst.setString(2, perCod.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Deleted");            
             upDateDB();
@@ -437,7 +535,7 @@ public class Usuario extends javax.swing.JFrame {
             
             pst = sqlConn.prepareStatement("UPDATE C1M_USUARIO SET UsuEstReg = ? WHERE UsuCod = ?");
             pst.setString(1, "I");
-            pst.setString(2, usuCod.getText());
+            pst.setString(2, perCod.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Inactive");            
             upDateDB();
@@ -451,7 +549,7 @@ public class Usuario extends javax.swing.JFrame {
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
             pst = sqlConn.prepareStatement("UPDATE C1M_USUARIO SET UsuEstReg = ? WHERE UsuCod = ?");
             pst.setString(1, "A");
-            pst.setString(2, usuCod.getText());
+            pst.setString(2, perCod.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Reactive");            
             upDateDB();
@@ -463,32 +561,32 @@ public class Usuario extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel RecordTable = (DefaultTableModel) jTable1.getModel();
         int SelectedRows = jTable1.getSelectedRow();
-        usuCod.setText(RecordTable.getValueAt(SelectedRows, 0).toString());
-        usuIden.setText(RecordTable.getValueAt(SelectedRows, 1).toString());
-        usuUsu.setText(RecordTable.getValueAt(SelectedRows, 2).toString());
-        usuPass.setText(RecordTable.getValueAt(SelectedRows, 3).toString());
-        usuEmp.setText(RecordTable.getValueAt(SelectedRows, 4).toString());
-        usuRol.setText(RecordTable.getValueAt(SelectedRows, 5).toString());
-        usuEst.setText(RecordTable.getValueAt(SelectedRows, 6).toString());
-        usuCod.setEditable(false);
-        usuIden.setEditable(false);
-        usuUsu.setEditable(false);
-        usuPass.setEditable(false);
-        usuEmp.setEditable(false);
-        usuRol.setEditable(false);
-        usuEst.setEditable(false);
+        perCod.setText(RecordTable.getValueAt(SelectedRows, 0).toString());
+        perIden.setText(RecordTable.getValueAt(SelectedRows, 1).toString());
+        perAño.setText(RecordTable.getValueAt(SelectedRows, 2).toString());
+        perApePat.setText(RecordTable.getValueAt(SelectedRows, 3).toString());
+        perApeMat.setText(RecordTable.getValueAt(SelectedRows, 4).toString());
+        perNom.setText(RecordTable.getValueAt(SelectedRows, 5).toString());
+        perEstReg.setText(RecordTable.getValueAt(SelectedRows, 6).toString());
+        perCod.setEditable(false);
+        perIden.setEditable(false);
+        perAño.setEditable(false);
+        perApePat.setEditable(false);
+        perApeMat.setEditable(false);
+        perNom.setEditable(false);
+        perEstReg.setEditable(false);
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void usuEstActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuEstActionPerformed
+    private void perEstRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perEstRegActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_usuEstActionPerformed
+    }//GEN-LAST:event_perEstRegActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         flags[1] = 1;
-        usuUsu.setEditable(true);
-        usuPass.setEditable(true);
-        usuRol.setEditable(false);
+        perAño.setEditable(true);
+        perApePat.setEditable(true);
+        perNom.setEditable(false);
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -503,21 +601,53 @@ public class Usuario extends javax.swing.JFrame {
         flags[4] = 1;
     }//GEN-LAST:event_btnReactivarActionPerformed
 
-    private void usuRolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuRolActionPerformed
+    private void perNomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perNomActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_usuRolActionPerformed
+    }//GEN-LAST:event_perNomActionPerformed
 
-    private void usuUsuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuUsuActionPerformed
+    private void perAñoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perAñoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_usuUsuActionPerformed
+    }//GEN-LAST:event_perAñoActionPerformed
 
-    private void usuEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuEmpActionPerformed
+    private void perApeMatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perApeMatActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_usuEmpActionPerformed
+    }//GEN-LAST:event_perApeMatActionPerformed
 
-    private void usuPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usuPassActionPerformed
+    private void perApePatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perApePatActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_usuPassActionPerformed
+    }//GEN-LAST:event_perApePatActionPerformed
+
+    private void perCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perCodActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_perCodActionPerformed
+
+    private void perNom1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perNom1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_perNom1ActionPerformed
+
+    private void perDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perDiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_perDiaActionPerformed
+
+    private void perMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perMesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_perMesActionPerformed
+
+    private void perFotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perFotActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_perFotActionPerformed
+
+    private void perFot1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perFot1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_perFot1ActionPerformed
+
+    private void perCooActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perCooActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_perCooActionPerformed
+
+    private void perCarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_perCarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_perCarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -536,14 +666,22 @@ public class Usuario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Persona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Persona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Persona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Usuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Persona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -556,7 +694,7 @@ public class Usuario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Usuario().setVisible(true);
+                new Persona().setVisible(true);
             }
         });
     }
@@ -572,6 +710,13 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JButton btnReactivar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -587,12 +732,19 @@ public class Usuario extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField usuCod;
-    private javax.swing.JTextField usuEmp;
-    private javax.swing.JTextField usuEst;
-    private javax.swing.JTextField usuIden;
-    private javax.swing.JTextField usuPass;
-    private javax.swing.JTextField usuRol;
-    private javax.swing.JTextField usuUsu;
+    private javax.swing.JTextField perApeMat;
+    private javax.swing.JTextField perApePat;
+    private javax.swing.JTextField perAño;
+    private javax.swing.JTextField perCar;
+    private javax.swing.JTextField perCod;
+    private javax.swing.JTextField perCoo;
+    private javax.swing.JTextField perDia;
+    private javax.swing.JTextField perEstReg;
+    private javax.swing.JTextField perFot;
+    private javax.swing.JTextField perFot1;
+    private javax.swing.JTextField perIden;
+    private javax.swing.JTextField perMes;
+    private javax.swing.JTextField perNom;
+    private javax.swing.JTextField perNom1;
     // End of variables declaration//GEN-END:variables
 }
