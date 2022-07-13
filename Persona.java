@@ -281,13 +281,13 @@ public class Persona extends javax.swing.JFrame {
         jTable1.setBackground(new java.awt.Color(255, 250, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Identificador", "Apellido Paterno", "Apellido Materno", "Nombre", "Nac. dia", "Nac. mes", "Nac. año", "Correo", "foto", "Cooperativa", "Cargo"
+                "Codigo", "Identificador", "Apellido Paterno", "Apellido Materno", "Nombre", "Nac. dia", "Nac. mes", "Nac. año", "Correo", "foto", "Cooperativa", "Cargo", "Est Registro"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {

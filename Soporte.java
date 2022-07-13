@@ -312,7 +312,6 @@ public class Soporte extends javax.swing.JFrame {
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
         sopCod.setText("");
         sopCodCenAyu.setText("");
-        //usuUsu.setText("");
         sopCodUsu.setText("");
         sopTipSer.setText("");
         sopReqEst.setText("");
@@ -323,7 +322,6 @@ public class Soporte extends javax.swing.JFrame {
         sopEstReg.setEditable(false);
         sopCod.setEditable(true);
         sopCodCenAyu.setEditable(true);
-        //usuUsu.setEditable(true);
         sopCodUsu.setEditable(true);
         sopTipSer.setEditable(true);
         sopReqEst.setEditable(true);
@@ -343,7 +341,6 @@ public class Soporte extends javax.swing.JFrame {
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         sopCod.setText("");
         sopCodCenAyu.setText("");
-        //usuUsu.setText("");
         sopCodUsu.setText("");
         sopTipSer.setText("");
         sopReqEst.setText("");
@@ -371,15 +368,16 @@ public class Soporte extends javax.swing.JFrame {
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
 
-            pst = sqlConn.prepareStatement("INSERT INTO C1M_USUARIO (UsuCod, UsuIde, UsuUsu, UsuPas, UsuEmp, UsuRol, UsuEstReg)"
-                    + "VALUES (?,?,?,?,?,?,?) ");
+            pst = sqlConn.prepareStatement("INSERT INTO C3M_SOPORTE (SopReqCod, SopCodCenAyu, SopCodUsu, SopTipSer, SopReqEst, SopEstReg)"
+                    + "VALUES (?,?,?,?,?,?) ");
+            //SopReqCod-SopCodCenAyu-SopCodUsu-SopTipSer-SopReqEst-SopEstReg
+
             pst.setString(1, sopCod.getText());
             pst.setString(2, sopCodCenAyu.getText());
-            //pst.setString(3, usuUsu.getText());
-            pst.setString(4, sopCodUsu.getText());
-            pst.setString(5, sopTipSer.getText());
-            pst.setString(6, sopReqEst.getText());
-            pst.setString(7, sopEstReg.getText());
+            pst.setString(3, sopCodUsu.getText());
+            pst.setString(4, sopTipSer.getText());
+            pst.setString(5, sopReqEst.getText());
+            pst.setString(6, sopEstReg.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Added");            
             upDateDB();
@@ -393,10 +391,8 @@ public class Soporte extends javax.swing.JFrame {
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
             
-            pst = sqlConn.prepareStatement("UPDATE C1M_USUARIO SET UsuUsu = ?, UsuPas = ? WHERE UsuCod= ? ");
-            //pst.setString(1, usuUsu.getText());
-            pst.setString(2, sopCodUsu.getText());
-            pst.setString(3, sopCod.getText());
+            pst = sqlConn.prepareStatement("UPDATE C3M_SOPORTE SET , SopCodUsu = ? WHERE SopReqCod= ? ");
+            pst.setString(1, sopCodUsu.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Uptaded");            
             upDateDB();
@@ -410,7 +406,7 @@ public class Soporte extends javax.swing.JFrame {
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
             
-            pst = sqlConn.prepareStatement("UPDATE C1M_USUARIO SET UsuEstReg = ? WHERE  UsuCod = ? ");
+            pst = sqlConn.prepareStatement("UPDATE C3M_SOPORTE SET SopEstReg = ? WHERE  SopReqCod = ? ");
             pst.setString(1, "*");
             pst.setString(2, sopCod.getText());
             pst.executeUpdate();
@@ -425,7 +421,7 @@ public class Soporte extends javax.swing.JFrame {
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
             
-            pst = sqlConn.prepareStatement("UPDATE C1M_USUARIO SET UsuEstReg = ? WHERE UsuCod = ?");
+            pst = sqlConn.prepareStatement("UPDATE C3M_SOPORTE SET SopEstReg = ? WHERE SopReqCod = ?");
             pst.setString(1, "I");
             pst.setString(2, sopCod.getText());
             pst.executeUpdate();
@@ -439,7 +435,7 @@ public class Soporte extends javax.swing.JFrame {
         try{
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
-            pst = sqlConn.prepareStatement("UPDATE C1M_USUARIO SET UsuEstReg = ? WHERE UsuCod = ?");
+            pst = sqlConn.prepareStatement("UPDATE C3M_SOPORTE SET SopEstReg = ? WHERE SopReqCod = ?");
             pst.setString(1, "A");
             pst.setString(2, sopCod.getText());
             pst.executeUpdate();
@@ -455,15 +451,13 @@ public class Soporte extends javax.swing.JFrame {
         int SelectedRows = jTable1.getSelectedRow();
         sopCod.setText(RecordTable.getValueAt(SelectedRows, 0).toString());
         sopCodCenAyu.setText(RecordTable.getValueAt(SelectedRows, 1).toString());
-        //usuUsu.setText(RecordTable.getValueAt(SelectedRows, 2).toString());
-        sopCodUsu.setText(RecordTable.getValueAt(SelectedRows, 3).toString());
-        sopTipSer.setText(RecordTable.getValueAt(SelectedRows, 4).toString());
-        sopReqEst.setText(RecordTable.getValueAt(SelectedRows, 5).toString());
-        sopEstReg.setText(RecordTable.getValueAt(SelectedRows, 6).toString());
+        sopCodUsu.setText(RecordTable.getValueAt(SelectedRows, 2).toString());
+        sopTipSer.setText(RecordTable.getValueAt(SelectedRows, 3).toString());
+        sopReqEst.setText(RecordTable.getValueAt(SelectedRows, 4).toString());
+        sopEstReg.setText(RecordTable.getValueAt(SelectedRows, 5).toString());
         
         sopCod.setEditable(false);
         sopCodCenAyu.setEditable(false);
-        //usuUsu.setEditable(false);
         sopCodUsu.setEditable(false);
         sopTipSer.setEditable(false);
         sopReqEst.setEditable(false);
@@ -477,7 +471,7 @@ public class Soporte extends javax.swing.JFrame {
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         flags[1] = 1;
-        //usuUsu.setEditable(true);
+        
         sopCodUsu.setEditable(true);
         sopReqEst.setEditable(false);
     }//GEN-LAST:event_btnModificarActionPerformed

@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author boris
  */
-public class Producto extends javax.swing.JFrame {
+public class Avance extends javax.swing.JFrame {
 
     private final String dbName    = Conexion_MYSQL.getDbName();
     private final String userName  = Conexion_MYSQL.getUserName();
@@ -32,7 +32,7 @@ public class Producto extends javax.swing.JFrame {
     ResultSet rs = null;
     int q, i, id, deleteItem;
     
-    public Producto() {
+    public Avance() {
         initComponents();
         upDateDB();
     }
@@ -48,8 +48,7 @@ public class Producto extends javax.swing.JFrame {
         try{
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
-            
-            pst = sqlConn.prepareStatement("SELECT * FROM C2M_PRODUCTO");
+            pst = sqlConn.prepareStatement("SELECT * FROM C3M_AVANCE");
             
             rs = pst.executeQuery();
             ResultSetMetaData stData = rs.getMetaData();
@@ -61,12 +60,12 @@ public class Producto extends javax.swing.JFrame {
             while(rs.next()){
                 Vector columnData = new Vector();
                 for(i = 1; i <= q;i++){
-                    columnData.add(rs.getString("ProCod"));
-                    columnData.add(rs.getString("ProIden"));
-                    columnData.add(rs.getString("ProDes"));
-                    columnData.add(rs.getString("ProSoc"));
-                    columnData.add(rs.getString("ProMon"));
-                    columnData.add(rs.getString("ProEstReg"));
+                    //AvaCod	AvaReqCod	AvaDes	AvaPre	AvaEstReg
+                    columnData.add(rs.getString("AvaCod"));
+                    columnData.add(rs.getString("AvaReqCod"));
+                    columnData.add(rs.getString("AvaDes"));
+                    columnData.add(rs.getString("AvaPre"));
+                    columnData.add(rs.getString("AvaEstReg"));
                 }
                 RecordTable.addRow(columnData);
             }
@@ -86,16 +85,14 @@ public class Producto extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        proCod = new javax.swing.JTextField();
-        proIden = new javax.swing.JTextField();
+        avaCod = new javax.swing.JTextField();
+        avaReqCod = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        proEstReg = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        proSoc = new javax.swing.JTextField();
-        proMon = new javax.swing.JTextField();
+        avaEstReg = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        avaPre = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        proDes = new javax.swing.JTextField();
+        avaDes = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -126,53 +123,48 @@ public class Producto extends javax.swing.JFrame {
         jLabel3.setText("Codigo:");
         jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
-        jLabel4.setText("Identificador:");
+        jLabel4.setText("Codigo de Soporte");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, -1, -1));
-        jPanel2.add(proCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 60, -1));
+        jPanel2.add(avaCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 60, -1));
 
-        proIden.setToolTipText("");
-        jPanel2.add(proIden, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 100, -1));
+        avaReqCod.setToolTipText("");
+        avaReqCod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                avaReqCodActionPerformed(evt);
+            }
+        });
+        jPanel2.add(avaReqCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 100, -1));
 
         jLabel5.setText("Estado de Registro");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, -1, -1));
 
-        proEstReg.setText("A");
-        proEstReg.addActionListener(new java.awt.event.ActionListener() {
+        avaEstReg.setText("A");
+        avaEstReg.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                proEstRegActionPerformed(evt);
+                avaEstRegActionPerformed(evt);
             }
         });
-        jPanel2.add(proEstReg, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 20, -1));
+        jPanel2.add(avaEstReg, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 20, -1));
 
-        jLabel7.setText("Socio");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 100, -1, -1));
+        jLabel9.setText("Preguntas");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 70, -1, -1));
 
-        proSoc.addActionListener(new java.awt.event.ActionListener() {
+        avaPre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                proSocActionPerformed(evt);
+                avaPreActionPerformed(evt);
             }
         });
-        jPanel2.add(proSoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 170, -1));
-
-        proMon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                proMonActionPerformed(evt);
-            }
-        });
-        jPanel2.add(proMon, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, 110, -1));
-
-        jLabel9.setText("Moneda");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 20, -1, -1));
+        jPanel2.add(avaPre, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 70, 250, 30));
 
         jLabel10.setText("Descripcion");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 20, -1, -1));
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, -1, -1));
 
-        proDes.addActionListener(new java.awt.event.ActionListener() {
+        avaDes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                proDesActionPerformed(evt);
+                avaDesActionPerformed(evt);
             }
         });
-        jPanel2.add(proDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 20, 200, 50));
+        jPanel2.add(avaDes, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 20, 250, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 870, 140));
 
@@ -184,13 +176,13 @@ public class Producto extends javax.swing.JFrame {
         jTable1.setBackground(new java.awt.Color(255, 250, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Codigo", "Identificador", "Descripcion", "Socio", "Moneda", "Estado de Registro"
+                "Codigo", "Cod Soporte", "Descripcion", "Preguntas", "Estado de Registro"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -276,7 +268,7 @@ public class Producto extends javax.swing.JFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel1.setText("Producto");
+        jLabel1.setText("Avance");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -296,10 +288,10 @@ public class Producto extends javax.swing.JFrame {
 
         jPanel1.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 150, 40));
 
-        jLabel2.setText("Registro de Producto");
+        jLabel2.setText("Registro de Avance");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 200, -1));
 
-        jLabel6.setText("Tabla tipo de Producto");
+        jLabel6.setText("Tabla tipo de Avance");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 150, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 930, 580));
@@ -310,20 +302,19 @@ public class Producto extends javax.swing.JFrame {
     private int[] flags = new int[5];
     private JFrame frame;
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        avaCod.setText("");
+        avaReqCod.setText("");
+        avaDes.setText("");
+        avaPre.setText("");
+        avaEstReg.setText("A");
         
-        proCod.setText("");
-        proIden.setText("");
-        proDes.setText("");
-        proSoc.setText("");
-        proMon.setText("");
-        proEstReg.setText("A");
         flags[0] = 1;
-        proEstReg.setEditable(false);
-        proCod.setEditable(true);
-        proIden.setEditable(true);
-        proMon.setEditable(true);
-        proDes.setEditable(true);
-        proSoc.setEditable(true);
+        
+        avaEstReg.setEditable(false);
+        avaCod.setEditable(true);
+        avaReqCod.setEditable(true);
+        avaDes.setEditable(true);
+        avaPre.setEditable(true);
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -338,15 +329,13 @@ public class Producto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-       
-        proCod.setText("");
-        proIden.setText("");
-        proDes.setText("");
-        proSoc.setText("");
-        proMon.setText("");       
-        proEstReg.setText("");
+        avaCod.setText("");
+        avaReqCod.setText("");
+        avaDes.setText("");
+        avaPre.setText("");
+        avaEstReg.setText("");
         flagsZero();
-        proEstReg.setEditable(false);
+        avaEstReg.setEditable(false);
     }//GEN-LAST:event_btnCancelarActionPerformed
     private void flagsZero(){
         for(int i = 0;i < flags.length; i++)
@@ -367,15 +356,16 @@ public class Producto extends javax.swing.JFrame {
         try{
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
-            //C2M_PRODUCTO : ProCod	ProIden	ProDes	ProSoc	ProMon	ProEstReg           
-            pst = sqlConn.prepareStatement("INSERT INTO C2M_PRODUCTO (ProCod, ProIden, ProDes, ProSoc, ProMon, ProEstReg)"
-                    + "VALUES (?,?,?,?,?,?) ");
-            pst.setString(1, proCod.getText());
-            pst.setString(2, proIden.getText());
-            pst.setString(3, proDes.getText());
-            pst.setString(4, proSoc.getText());
-            pst.setString(5, proMon.getText());
-            pst.setString(6, proEstReg.getText());
+
+            pst = sqlConn.prepareStatement("INSERT INTO C3M_AVANCE (AvaCod, AvaReqCod, AvaDes, AvaPre, AvaEstReg)"
+                    + "VALUES (?,?,?,?,?)");
+            //AvaCod	AvaReqCod	AvaDes	AvaPre	AvaEstReg
+
+            pst.setString(1, avaCod.getText());
+            pst.setString(2, avaReqCod.getText());
+            pst.setString(3, avaDes.getText());
+            pst.setString(4, avaPre.getText());
+            pst.setString(5, avaEstReg.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Added");            
             upDateDB();
@@ -388,12 +378,12 @@ public class Producto extends javax.swing.JFrame {
         try{
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
-            
-            pst = sqlConn.prepareStatement("UPDATE C2M_PRODUCTO SET ProIden = ?, ProDes = ?, ProMon = ? WHERE ProCod= ? ");
-            pst.setString(1, proIden.getText());
-            pst.setString(2, proDes.getText());
-            pst.setString(3, proMon.getText());
-            pst.setString(4, proCod.getText());
+             //AvaCod	AvaReqCod	AvaDes	AvaPre	AvaEstReg
+
+            pst = sqlConn.prepareStatement("UPDATE C3M_AVANCE SET AvaDes = ?, AvaPre = ? WHERE AvaCod= ? ");
+            pst.setString(1, avaDes.getText());
+            pst.setString(2, avaPre.getText());
+       
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Uptaded");            
             upDateDB();
@@ -406,10 +396,10 @@ public class Producto extends javax.swing.JFrame {
         try{
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
-             
-            pst = sqlConn.prepareStatement("UPDATE C2M_PRODUCTO SET ProEstReg = ? WHERE  ProCod = ? ");
+            //  C3M_AVANCE   AvaCod	AvaReqCod	AvaDes	AvaPre	AvaEstReg
+            pst = sqlConn.prepareStatement("UPDATE C3M_AVANCE SET AvaEstReg = ? WHERE  AvaCod = ? ");
             pst.setString(1, "*");
-            pst.setString(2, proCod.getText());
+            pst.setString(2, avaCod.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Deleted");            
             upDateDB();
@@ -421,10 +411,10 @@ public class Producto extends javax.swing.JFrame {
         try{
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
-              
-            pst = sqlConn.prepareStatement("UPDATE C2M_PRODUCTO SET ProEstReg = ? WHERE ProCod = ?");
+           
+            pst = sqlConn.prepareStatement("UPDATE C3M_AVANCE SET AvaEstReg = ? WHERE AvaCod = ?");
             pst.setString(1, "I");
-            pst.setString(2, proCod.getText());
+            pst.setString(2, avaCod.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Inactive");            
             upDateDB();
@@ -436,10 +426,10 @@ public class Producto extends javax.swing.JFrame {
         try{
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
-            
-            pst = sqlConn.prepareStatement("UPDATE C2M_PRODUCTO SET ProEstReg = ? WHERE ProCod = ?");
+             //  C3M_AVANCE   AvaCod	AvaReqCod	AvaDes	AvaPre	AvaEstReg
+            pst = sqlConn.prepareStatement("UPDATE C3M_AVANCE SET AvaEstReg = ? WHERE AvaCod = ?");
             pst.setString(1, "A");
-            pst.setString(2, proCod.getText());
+            pst.setString(2, avaCod.getText());
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Reactive");            
             upDateDB();
@@ -451,34 +441,30 @@ public class Producto extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel RecordTable = (DefaultTableModel) jTable1.getModel();
         int SelectedRows = jTable1.getSelectedRow();
-         //C2M_PRODUCTO : ProCod	ProIden	ProDes	ProSoc	ProMon	ProEstReg    
-        proCod.setText(RecordTable.getValueAt(SelectedRows, 0).toString());
-        proIden.setText(RecordTable.getValueAt(SelectedRows, 1).toString());
-        proDes.setText(RecordTable.getValueAt(SelectedRows, 2).toString());
-        proSoc.setText(RecordTable.getValueAt(SelectedRows, 3).toString());
-        proMon.setText(RecordTable.getValueAt(SelectedRows, 4).toString());
-        proEstReg.setText(RecordTable.getValueAt(SelectedRows, 5).toString());
+        avaCod.setText(RecordTable.getValueAt(SelectedRows, 0).toString());
+        avaReqCod.setText(RecordTable.getValueAt(SelectedRows, 1).toString());
+        avaDes.setText(RecordTable.getValueAt(SelectedRows, 2).toString());
+        avaPre.setText(RecordTable.getValueAt(SelectedRows, 3).toString());
+        avaEstReg.setText(RecordTable.getValueAt(SelectedRows, 4).toString());
         
-        proCod.setEditable(false);
-        proIden.setEditable(false);
-        proDes.setEditable(false);
-        proSoc.setEditable(false);
-        proMon.setEditable(false);
-        proEstReg.setEditable(false);
+        avaCod.setEditable(false);
+        avaReqCod.setEditable(false);
+        avaDes.setEditable(false);
+        avaPre.setEditable(false);
+        avaEstReg.setEditable(false);
     }//GEN-LAST:event_jTable1MouseClicked
 
-    private void proEstRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proEstRegActionPerformed
+    private void avaEstRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avaEstRegActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_proEstRegActionPerformed
+    }//GEN-LAST:event_avaEstRegActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
         // TODO add your handling code here:
         flags[1] = 1;
-        proIden.setEditable(true);
-        proDes.setEditable(true);
-        proMon.setEditable(true);
         
-        proSoc.setEditable(false);
+        avaDes.setEditable(true);
+        avaPre.setEditable(true);
+        avaReqCod.setEditable(false);
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
@@ -493,17 +479,17 @@ public class Producto extends javax.swing.JFrame {
         flags[4] = 1;
     }//GEN-LAST:event_btnReactivarActionPerformed
 
-    private void proSocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proSocActionPerformed
+    private void avaPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avaPreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_proSocActionPerformed
+    }//GEN-LAST:event_avaPreActionPerformed
 
-    private void proDesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proDesActionPerformed
+    private void avaDesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avaDesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_proDesActionPerformed
+    }//GEN-LAST:event_avaDesActionPerformed
 
-    private void proMonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proMonActionPerformed
+    private void avaReqCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_avaReqCodActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_proMonActionPerformed
+    }//GEN-LAST:event_avaReqCodActionPerformed
 
     /**
      * @param args the command line arguments
@@ -522,14 +508,30 @@ public class Producto extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Producto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Avance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Producto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Avance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Producto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Avance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Producto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Avance.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -550,12 +552,17 @@ public class Producto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Producto().setVisible(true);
+                new Avance().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField avaCod;
+    private javax.swing.JTextField avaDes;
+    private javax.swing.JTextField avaEstReg;
+    private javax.swing.JTextField avaPre;
+    private javax.swing.JTextField avaReqCod;
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnCancelar;
@@ -571,7 +578,6 @@ public class Producto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -580,11 +586,5 @@ public class Producto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField proCod;
-    private javax.swing.JTextField proDes;
-    private javax.swing.JTextField proEstReg;
-    private javax.swing.JTextField proIden;
-    private javax.swing.JTextField proMon;
-    private javax.swing.JTextField proSoc;
     // End of variables declaration//GEN-END:variables
 }
