@@ -383,6 +383,7 @@ public class Avance extends javax.swing.JFrame {
             pst = sqlConn.prepareStatement("UPDATE C3M_AVANCE SET AvaDes = ?, AvaPre = ? WHERE AvaCod= ? ");
             pst.setString(1, avaDes.getText());
             pst.setString(2, avaPre.getText());
+            pst.setString(3, avaCod.getText());
        
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Uptaded");            

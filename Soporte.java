@@ -391,8 +391,11 @@ public class Soporte extends javax.swing.JFrame {
             Class.forName(driver).newInstance();
             sqlConn = DriverManager.getConnection(url + dbName, userName,password);
             
-            pst = sqlConn.prepareStatement("UPDATE C3M_SOPORTE SET , SopCodUsu = ? WHERE SopReqCod= ? ");
+            pst = sqlConn.prepareStatement("UPDATE C3M_SOPORTE SET SopCodUsu = ? WHERE SopReqCod= ? ");
+            
             pst.setString(1, sopCodUsu.getText());
+            pst.setString(2, sopCod.getText());
+            
             pst.executeUpdate();
             JOptionPane.showMessageDialog(this, "Record Uptaded");            
             upDateDB();
